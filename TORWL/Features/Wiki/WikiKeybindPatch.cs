@@ -26,7 +26,7 @@ namespace TORWL.Features.Wiki
 
         private static void OpenWiki(HudManager hud)
         {
-            GameObject prefab = LaunchpadAssets.WikiPrefab?.LoadAsset();
+            GameObject? prefab = LaunchpadAssets.WikiPrefab?.LoadAsset();
             if (prefab == null)
             {
                 Debug.LogError("Wiki Prefab not found in LaunchpadAssets!");

@@ -22,17 +22,18 @@ namespace TORWL.Features.Wiki
     {
         public WikiPanel(IntPtr ptr) : base(ptr) { }
 
-        public static WikiPanel Instance;
+        public static WikiPanel? Instance;
         public static bool IsOpen => Instance != null;
 
-        private TMP_InputField _searchInput;
-        private Transform _contentRoot;
-        private GameObject _buttonTemplate;
+        private TMP_InputField? _searchInput;
+        private Transform? _contentRoot;
+        private GameObject? _buttonTemplate;
         private bool _hasPopulated;
 
-        private Transform _modifierContentRoot;
-        private GameObject _modifierButtonTemplate;
+        private Transform? _modifierContentRoot;
+        private GameObject? _modifierButtonTemplate;
         private bool _hasPopulatedModifiers;
+
         private enum ModifierCategory
         {
             Universal,
@@ -40,6 +41,23 @@ namespace TORWL.Features.Wiki
             Impostor,
             Neutral,
             Coven
+        }
+
+        private void OnEnable()
+        {
+            if (PlayerControl.LocalPlayer != null)
+            {
+                PlayerControl.LocalPlayer.moveable = false;
+                PlayerControl.LocalPlayer.NetTransform.Halt();
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (PlayerControl.LocalPlayer != null)
+            {
+                PlayerControl.LocalPlayer.moveable = true;
+            }
         }
 
         private Color GetFactionColor(string faction)
@@ -206,7 +224,7 @@ namespace TORWL.Features.Wiki
             }
         }
 
-        private Transform FindChildRecursive(Transform parent, string name)
+        private Transform? FindChildRecursive(Transform parent, string name)
         {
             foreach (var t in parent.GetComponentsInChildren<Transform>(true))
             {
@@ -242,7 +260,6 @@ namespace TORWL.Features.Wiki
                 else if (role is ICovenRole) faction = "Coven";
                 else continue;
 
-                // CREATE BUTTON
                 var button = Instantiate(_buttonTemplate, _contentRoot);
                 button.SetActive(true);
                 button.transform.localScale = Vector3.one;
@@ -286,8 +303,6 @@ namespace TORWL.Features.Wiki
                     tintImage.color = GetFactionColor(faction);
                 }
             }
-
-            Debug.Log("[Wiki] Role buttons populated successfully");
         }
 
         [HideFromIl2Cpp]
@@ -296,7 +311,6 @@ namespace TORWL.Features.Wiki
             if (_modifierContentRoot == null || _modifierButtonTemplate == null)
                 return;
 
-            // Clear old buttons
             for (int i = _modifierContentRoot.childCount - 1; i >= 0; i--)
             {
                 var child = _modifierContentRoot.GetChild(i).gameObject;
@@ -319,7 +333,6 @@ namespace TORWL.Features.Wiki
                 button.SetActive(true);
                 button.transform.localScale = Vector3.one;
 
-                // NAME (already contains color tags!)
                 var nameText = button.transform
                     .Find("ModifierName")
                     ?.GetComponent<TextMeshProUGUI>();
@@ -332,7 +345,6 @@ namespace TORWL.Features.Wiki
 
                 button.name = gameModifier.ModifierName;
 
-                // CATEGORY (Crewmate / Universal)
                 var categoryText = button.transform
                     .Find("Faction/ModifierFactionText")
                     ?.GetComponent<TextMeshProUGUI>();
@@ -340,7 +352,6 @@ namespace TORWL.Features.Wiki
                 if (categoryText != null)
                     categoryText.text = GetModifierCategory(gameModifier);
 
-                // ICON
                 var icon = button.transform
                     .Find("ModifierIcon")
                     ?.GetComponent<Image>();
@@ -352,7 +363,6 @@ namespace TORWL.Features.Wiki
                         icon.sprite = sprite;
                 }
 
-                // OPTIONAL: tint bar / background
                 var tint = button.transform
                     .Find("Tint")
                     ?.GetComponent<Image>();
@@ -360,14 +370,12 @@ namespace TORWL.Features.Wiki
                 if (tint != null)
                     tint.color = GetModifierCategoryColor(gameModifier);
             }
-
-            Debug.Log("[Wiki] Modifier buttons populated successfully");
         }
 
         [HideFromIl2Cpp]
         public void OnSearchChanged(string query)
         {
-            if (_contentRoot == null) return;
+            if (_contentRoot == null || _buttonTemplate == null) return;
 
             string clean = query.Trim().ToLowerInvariant();
 
@@ -395,7 +403,7 @@ namespace TORWL.Features.Wiki
         [HideFromIl2Cpp]
         public void OnModifierSearchChanged(string query)
         {
-            if (_modifierContentRoot == null) return;
+            if (_modifierContentRoot == null || _modifierButtonTemplate == null) return;
 
             string clean = query.Trim().ToLowerInvariant();
 
