@@ -6,11 +6,12 @@ using MiraAPI.GameOptions;
 using MiraAPI.Networking;
 using MiraAPI.Utilities.Assets;
 using Reactor.Utilities.Extensions;
+using MiraAPI.Modifiers.Types;
 using UnityEngine;
 
 namespace TORWL.Modifiers.Game.Crewmate;
 
-public class BurstModifier : LPModifier
+public class BurstModifier : GameModifier
 {
     public override string ModifierName => $"<color=#{LaunchpadPalette.Burst.ToHtmlStringRGBA()}>Burst</color>";
     public override LoadableAsset<Sprite>? ModifierIcon => LaunchpadAssets.BurstIcon;

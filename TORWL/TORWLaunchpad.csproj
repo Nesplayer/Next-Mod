@@ -18,7 +18,7 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="AllOfUs.MiraAPI" Version="0.3.3" />
+        <PackageReference Include="AllOfUs.MiraAPI" Version="0.3.5" />
         <PackageReference Include="BepInEx.Unity.Common" Version="6.0.0-be.738" />
         <PackageReference Include="Reactor" Version="2.3.1" />
         <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.735" Private="false" ExcludeAssets="runtime;native" />
@@ -34,9 +34,11 @@
         <EmbeddedResource Condition="$(Platform)=='AnyCPU'" Include="Resources/launchpad-assets-win.bundle" />
         <EmbeddedResource Condition="$(Platform)=='AnyCPU'" Include="Resources/icons-win.bundle" />
         <EmbeddedResource Condition="$(Platform)=='AnyCPU'" Include="Resources/ability-win.bundle" />
+        <EmbeddedResource Condition="$(Platform)=='AnyCPU'" Include="Resources/wikipanel-win.bundle" />
         <EmbeddedResource Condition="$(Platform)=='Android'" Include="Resources/launchpad-assets-android.bundle" />
         <EmbeddedResource Condition="$(Platform)=='Android'" Include="Resources/icons-android.bundle" />
         <EmbeddedResource Condition="$(Platform)=='Android'" Include="Resources/ability-android.bundle" />
+        <EmbeddedResource Condition="$(Platform)=='Android'" Include="Resources/wikipanel-android.bundle" />
         <EmbeddedResource Include="Resources/**/*.png" />
         <EmbeddedResource Include="Resources/**/*.wav" />
     </ItemGroup>

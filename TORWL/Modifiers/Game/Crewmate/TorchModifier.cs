@@ -6,10 +6,11 @@ using MiraAPI.GameOptions;
 using MiraAPI.Utilities.Assets;
 using UnityEngine;
 using Reactor.Utilities.Extensions;
+using MiraAPI.Modifiers.Types;
 
 namespace TORWL.Modifiers.Game.Crewmate;
 
-public sealed class TorchModifier : LPModifier
+public sealed class TorchModifier : GameModifier
 {
     public override string ModifierName => $"<color=#{LaunchpadPalette.Torch.ToHtmlStringRGBA()}>Torch</color>";
     public override Color FreeplayFileColor => new Color32(255, 127, 50, 255);

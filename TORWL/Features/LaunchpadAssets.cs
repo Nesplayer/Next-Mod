@@ -10,6 +10,7 @@ public static class LaunchpadAssets
     public static readonly AssetBundle Bundle = AssetBundleManager.Load("launchpad-assets");
     public static readonly AssetBundle Icons = AssetBundleManager.Load("icons");
     public static readonly AssetBundle Ability = AssetBundleManager.Load("ability");
+    public static readonly AssetBundle Wiki = AssetBundleManager.Load("wikipanel");
 
     // Shaders
     public static readonly LoadableAsset<Shader> BloomShader = new LoadableBundleAsset<Shader>("Bloom.shader", Bundle);
@@ -17,6 +18,11 @@ public static class LaunchpadAssets
     // Materials
     public static readonly LoadableAsset<Material> GradientMaterial = new LoadableBundleAsset<Material>("GradientPlayerMaterial", Bundle);
     public static readonly LoadableAsset<Material> MaskedGradientMaterial = new LoadableBundleAsset<Material>("MaskedGradientMaterial", Bundle);
+    
+    // Placeholder
+    public static readonly LoadableAsset<Sprite> ImpIcon = new LoadableResourceAsset("TORWLaunchpad.Resources.Imp.png");
+    public static readonly LoadableAsset<Sprite> CrewIcon = new LoadableResourceAsset("TORWLaunchpad.Resources.Crew.png");
+    public static readonly LoadableAsset<Sprite> NeutIcon = new LoadableResourceAsset("TORWLaunchpad.Resources.Neutral.png");
 
     // Role Icons
     public static readonly LoadableAsset<Sprite> Poltergeist = new LoadableResourceAsset("TORWLaunchpad.Resources.RoleIcons.Poltergeist.png");
@@ -145,6 +151,7 @@ public static class LaunchpadAssets
     public static readonly LoadableAsset<GameObject> ReaperDisplay = new LoadableBundleAsset<GameObject>("ReaperSoulDisplay", Bundle);
     public static readonly LoadableAsset<GameObject> Notepad = new LoadableBundleAsset<GameObject>("Notepad", Bundle);
     public static readonly LoadableAsset<GameObject> NodeGame = new LoadableBundleAsset<GameObject>("NodeMinigame", Bundle);
+    public static readonly LoadableAsset<GameObject> WikiPrefab = new LoadableBundleAsset<GameObject>("WikiPanel", Wiki);
 
     public static readonly LoadableAsset<GameObject> PlayerTags = new LoadableBundleAsset<GameObject>("PlayerTags", Bundle);
 }

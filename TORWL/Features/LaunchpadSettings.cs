@@ -33,7 +33,7 @@ public class LaunchpadSettings : LocalSettingsTab
     [LocalToggleSetting]
     public ConfigEntry<bool> UniqueDummies { get; }
 
-    [LocalEnumSetting(names:["Bottom Left", "Bottom Right"])]
+    [LocalEnumSetting(names: ["Bottom Left", "Bottom Right"])]
     public ConfigEntry<ButtonLocation> ButtonLocation { get; }
 
     public LaunchpadSettings(ConfigFile config) : base(config)
@@ -83,7 +83,6 @@ public class LaunchpadSettings : LocalSettingsTab
             }
         };
     }
-
 
     public static void SetBloom(bool enabled)
     {

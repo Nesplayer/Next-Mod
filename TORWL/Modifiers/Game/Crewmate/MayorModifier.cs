@@ -7,10 +7,11 @@ using MiraAPI.GameOptions;
 using MiraAPI.Utilities;
 using Reactor.Utilities.Extensions;
 using UnityEngine;
+using MiraAPI.Modifiers.Types;
 
 namespace TORWL.Modifiers.Game.Crewmate;
 
-public sealed class MayorModifier : LPModifier
+public sealed class MayorModifier : GameModifier
 {
     public override string ModifierName => $"<color=#{LaunchpadPalette.Mayor.ToHtmlStringRGBA()}>Mayor</color>";
     public override LoadableAsset<Sprite>? ModifierIcon => LaunchpadAssets.MayorIcon;

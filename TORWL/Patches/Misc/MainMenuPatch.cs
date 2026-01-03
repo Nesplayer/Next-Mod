@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using TORWL.Features;
+using TORWL.Features.Wiki;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
