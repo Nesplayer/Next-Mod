@@ -56,7 +56,6 @@ namespace TORWL.Features.Wiki
 
         private ModifierCategory GetModifierCategoryType(GameModifier modifier)
         {
-            // Universal modifiers
             if (modifier is LPModifier)
                 return ModifierCategory.Universal;
 

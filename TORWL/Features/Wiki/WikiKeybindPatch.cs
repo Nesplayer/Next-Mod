@@ -9,7 +9,6 @@ namespace TORWL.Features.Wiki
     {
         public static void Postfix(HudManager __instance)
         {
-            // Only allow opening if the player is actually in a game/lobby
             if (AmongUsClient.Instance == null) return;
 
             if (Input.GetKeyDown(KeyCode.F3))
@@ -27,7 +26,6 @@ namespace TORWL.Features.Wiki
 
         private static void OpenWiki(HudManager hud)
         {
-            // Load prefab from your AssetBundle
             GameObject prefab = LaunchpadAssets.WikiPrefab?.LoadAsset();
             if (prefab == null)
             {
@@ -35,12 +33,10 @@ namespace TORWL.Features.Wiki
                 return;
             }
 
-            // Instantiate and set parent to the HUD so it scales with the screen
             GameObject wikiObj = Object.Instantiate(prefab, hud.transform);
             wikiObj.transform.localPosition = Vector3.zero;
             wikiObj.transform.localScale = Vector3.one;
 
-            // Add the script so the buttons and search start working
             wikiObj.AddComponent<WikiPanel>();
         }
     }

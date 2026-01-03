@@ -1,5 +1,6 @@
 ﻿using System;
 using TORWL.Roles.Afterlife;
+using TORWL.Features;
 using MiraAPI.Roles;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ public class OutcastGhostRole(IntPtr ptr) : RoleBehaviour(ptr), INeutralRole, IA
         RoleHintType = RoleHintType.TaskHint,
         TasksCountForProgress = false,
         CanUseVent = false,
+        Icon = LaunchpadAssets.NeutIcon,
     };
 
     public override bool IsDead => true;
