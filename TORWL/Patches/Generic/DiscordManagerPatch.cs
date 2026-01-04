@@ -27,8 +27,9 @@ namespace TORWL.Patches.Generic
             {
                 return true;
             }
-            
+            #if !ANDROID
             InitializeDiscord(__instance);
+#endif
             return false;
         }
 
@@ -72,6 +73,7 @@ namespace TORWL.Patches.Generic
             }
         }
         
+        #if !ANDROID
         private static void InitializeDiscord(DiscordManager __instance)
         {
             __instance.presence = new Discord.Discord(ClientId, 1UL);
@@ -85,5 +87,6 @@ namespace TORWL.Patches.Generic
             }));
             __instance.SetInMenus();
         }
+        #endif
     }
 }
