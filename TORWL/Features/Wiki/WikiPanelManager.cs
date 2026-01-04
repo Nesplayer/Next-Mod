@@ -1,7 +1,9 @@
 using UnityEngine;
 using TMPro;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Il2CppInterop.Runtime.Attributes;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -14,6 +16,10 @@ using MiraAPI.Roles;
 using MiraAPI.Modifiers.Types;
 using TORWL.Modifiers;
 using MiraAPI.Modifiers;
+using MiraAPI.GameOptions;
+using MiraAPI.GameOptions.Attributes;
+using MiraAPI.GameOptions.OptionTypes;
+using MiraAPI.Utilities;
 
 namespace TORWL.Features.Wiki
 {
@@ -33,6 +39,10 @@ namespace TORWL.Features.Wiki
         private Transform _modifierContentRoot;
         private GameObject _modifierButtonTemplate;
         private bool _hasPopulatedModifiers;
+        
+        private Transform _infoContent;
+        private TextMeshProUGUI _roleLongDescription;
+        
         private enum ModifierCategory
         {
             Universal,
@@ -167,6 +177,12 @@ namespace TORWL.Features.Wiki
             }
 
             _modifierButtonTemplate.SetActive(false);
+            
+            _infoContent = FindChildRecursive(transform, "RoleInfo");
+            if (_infoContent != null)
+            {
+                _roleLongDescription = FindChildRecursive(_infoContent, "Description")?.GetComponent<TextMeshProUGUI>();
+            }
 
             var exitBtn = FindChildRecursive(transform, "X")
                 ?.GetComponent<PassiveButton>();
@@ -215,6 +231,103 @@ namespace TORWL.Features.Wiki
             }
             return null;
         }
+        
+        [HideFromIl2Cpp]
+public void SelectRole(ICustomRole role)
+{
+    if (role == null || _infoContent == null) return;
+
+    // --- Update Role Description ---
+    if (_roleLongDescription != null)
+    {
+        string baseDescription =
+            string.IsNullOrEmpty(role.RoleLongDescription)
+                ? "No description available."
+                : role.RoleLongDescription;
+
+        _roleLongDescription.text =
+            baseDescription;
+    }
+
+    // --- Find the Info container inside RoleInfo ---
+    var infoContainer = FindChildRecursive(_infoContent, "Info");
+    if (infoContainer == null)
+    {
+        Debug.LogWarning("[Wiki] Info container not found in RoleInfo!");
+        return;
+    }
+
+    // --- Update Role Name ---
+    var nameText = infoContainer
+        .GetComponentsInChildren<TextMeshProUGUI>(true)
+        .FirstOrDefault(t => t.name.Equals("Name", StringComparison.OrdinalIgnoreCase));
+    if (nameText != null)
+        nameText.text = role.RoleName;
+    else
+        Debug.LogWarning("[Wiki] Role Name text not found in Info!");
+
+    // --- Update Role Icon ---
+    var iconImage = infoContainer
+        .GetComponentsInChildren<Image>(true)
+        .FirstOrDefault(i => i.name.Equals("Icon", StringComparison.OrdinalIgnoreCase));
+    if (iconImage != null && role.Configuration.Icon != null)
+    {
+        var sprite = role.Configuration.Icon.LoadAsset();
+        if (sprite != null)
+            iconImage.sprite = sprite;
+        else
+            Debug.LogWarning($"[Wiki] Icon sprite is null for {role.RoleName}");
+    }
+    else
+    {
+        Debug.LogWarning("[Wiki] Icon Image not found in Info!");
+    }
+
+    // --- Update Faction Text ---
+    var factionText = infoContainer
+        .GetComponentsInChildren<TextMeshProUGUI>(true)
+        .FirstOrDefault(t => t.name.Equals("FactionText", StringComparison.OrdinalIgnoreCase));
+    if (factionText != null)
+    {
+        string faction = role switch
+        {
+            ICrewmateRole => "Crewmate",
+            IImpostorRole => "Impostor",
+            INeutralRole => "Neutral",
+            ICovenRole => "Coven",
+            _ => "Unknown"
+        };
+
+        Color col = GetFactionColor(faction);
+        string hexColor = ColorUtility.ToHtmlStringRGB(col);
+        factionText.text = $"<color=#{hexColor}>{faction}</color>";
+    }
+    else
+    {
+        Debug.LogWarning("[Wiki] FactionText not found in Info!");
+    }
+
+    // --- Clean up any cloned children if present ---
+    for (int i = _infoContent.childCount - 1; i >= 0; i--)
+    {
+        var child = _infoContent.GetChild(i).gameObject;
+        if (child == _roleLongDescription?.gameObject) continue;
+        if (child == nameText?.gameObject) continue;
+        if (child == iconImage?.gameObject) continue;
+        if (child == factionText?.gameObject) continue;
+        if (child.name.Contains("(Clone)")) Destroy(child);
+    }
+}
+        
+        [HideFromIl2Cpp]
+        public void OnRoleButtonClicked(int roleIndex)
+        {
+            if (RoleManager.Instance.AllRoles == null) return;
+            if (roleIndex < 0 || roleIndex >= RoleManager.Instance.AllRoles.Count) return;
+
+            var role = RoleManager.Instance.AllRoles[roleIndex] as ICustomRole;
+            SelectRole(role);
+        }
 
         [HideFromIl2Cpp]
         public void PopulateRoles()
@@ -231,8 +344,10 @@ namespace TORWL.Features.Wiki
 
             _buttonTemplate.SetActive(false);
 
-            foreach (var role in RoleManager.Instance.AllRoles)
+            var roles = RoleManager.Instance.AllRoles;
+            for (int i = 0; i < roles.Count; i++)
             {
+                var role = roles[i];
                 if (role == null) continue;
 
                 string faction;
@@ -284,6 +399,13 @@ namespace TORWL.Features.Wiki
                 if (tintImage != null)
                 {
                     tintImage.color = GetFactionColor(faction);
+                }
+                
+                int index = i;
+                var btnComp = button.GetComponent<Button>();
+                if (btnComp != null)
+                {
+                    btnComp.onClick.AddListener(new Action(delegate { OnRoleButtonClicked(index); }));
                 }
             }
 
