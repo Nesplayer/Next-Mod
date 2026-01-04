@@ -26,6 +26,11 @@ public static class Extensions
     {
         return body.gameObject.GetComponent<DeadBodyCacheComponent>();
     }
+    
+    public static bool HasDied(this PlayerControl player)
+       {
+           return !player || !player.Data || player.Data.IsDead || player.Data.Disconnected;
+       }
 
     public static void SetBodyType(this PlayerControl player, int bodyType)
     {
