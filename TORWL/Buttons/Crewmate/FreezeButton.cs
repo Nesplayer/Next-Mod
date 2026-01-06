@@ -22,7 +22,6 @@ public class FreezeButton : BaseLaunchpadButton<DeadBody>
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.FreezeButton;
     public override float Distance => PlayerControl.LocalPlayer.MaxReportDistance / 4f;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => true;
 
     public override void CreateButton(Transform parent)
     {

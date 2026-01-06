@@ -20,7 +20,6 @@ public class DeadlockButton : BaseLaunchpadButton
     public override int MaxUses => (int)OptionGroupSingleton<HitmanOptions>.Instance.DeadlockUses;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.DeadlockButton;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => false;
 
     public override bool Enabled(RoleBehaviour? role) => role is HitmanRole;
 

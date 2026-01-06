@@ -20,7 +20,6 @@ public class SilenceButton : BaseLaunchpadButton<PlayerControl>
     public override int MaxUses => (int)OptionGroupSingleton<SilencerOptions>.Instance.SilenceUses;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.SilenceButton;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack { get; }
 
     public override BaseKeybind Keybind => MiraGlobalKeybinds.PrimaryAbility;
 

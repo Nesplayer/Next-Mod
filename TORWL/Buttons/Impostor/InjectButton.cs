@@ -23,7 +23,6 @@ public class InjectButton : BaseLaunchpadButton<PlayerControl>
     public override int MaxUses => (int)OptionGroupSingleton<SurgeonOptions>.Instance.InjectUses;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.InjectButton;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => false;
 
     public override bool Enabled(RoleBehaviour? role) => role is SurgeonRole;
 

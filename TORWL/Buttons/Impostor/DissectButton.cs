@@ -21,7 +21,6 @@ public class DissectButton : BaseLaunchpadButton<DeadBody>
     public override int MaxUses => (int)OptionGroupSingleton<SurgeonOptions>.Instance.DissectUses;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.DissectButton;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => false;
 
     public override BaseKeybind Keybind => MiraGlobalKeybinds.SecondaryAbility;
 

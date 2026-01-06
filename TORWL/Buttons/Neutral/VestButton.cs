@@ -19,7 +19,6 @@ public sealed class VestButton : BaseLaunchpadButton<PlayerControl>
     public override int MaxUses => (int)OptionGroupSingleton<SurvivorOptions>.Instance.MaxVests;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.Vest;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => false;
     public override bool Enabled(RoleBehaviour? role) => role is SurvivorRole;
 
     public override void CreateButton(Transform parent)

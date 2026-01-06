@@ -22,7 +22,6 @@ public class ToxifyButton : BaseLaunchpadButton<PlayerControl>
     public override int MaxUses => (int)OptionGroupSingleton<ToxifierOptions>.Instance.ToxifyUses;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.Toxify;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => false;
 
     public override bool Enabled(RoleBehaviour? role) => role is ToxifierRole;
 

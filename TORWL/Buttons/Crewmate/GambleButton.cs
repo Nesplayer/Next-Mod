@@ -22,7 +22,6 @@ public class GambleButton : BaseLaunchpadButton<PlayerControl>
     public override int MaxUses => (int)OptionGroupSingleton<GamblerOptions>.Instance.GambleUses;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.GambleButton;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => true;
 
     public override bool Enabled(RoleBehaviour? role) => role is GamblerRole;
 

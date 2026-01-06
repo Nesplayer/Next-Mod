@@ -24,7 +24,6 @@ public class HideButton : BaseLaunchpadButton<DeadBody>
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.HideButton;
     public override float Distance => PlayerControl.LocalPlayer.MaxReportDistance / 4f;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => true;
 
     public override BaseKeybind Keybind => MiraGlobalKeybinds.SecondaryAbility;
 

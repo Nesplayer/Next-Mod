@@ -20,7 +20,6 @@ public class DigButton : BaseLaunchpadButton
     public override int MaxUses => (int)OptionGroupSingleton<BurrowerOptions>.Instance.VentDigUses;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.DigVentButton;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => false;
 
     private float _ventDist = OptionGroupSingleton<BurrowerOptions>.Instance.VentDist;
 

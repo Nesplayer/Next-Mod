@@ -21,7 +21,6 @@ public class SealButton : BaseLaunchpadButton<Vent>
     public override int MaxUses => (int)OptionGroupSingleton<SealerOptions>.Instance.SealVentUses;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.SealButton;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => false;
     public override float Distance => 1f;
 
     public override bool Enabled(RoleBehaviour? role)

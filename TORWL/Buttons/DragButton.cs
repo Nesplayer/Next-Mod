@@ -24,7 +24,6 @@ public class DragButton : BaseLaunchpadButton<DeadBody>
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.DragButton;
     public override float Distance => PlayerControl.LocalPlayer.MaxReportDistance / 4f;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => true;
 
     public override bool Enabled(RoleBehaviour? role)
     {

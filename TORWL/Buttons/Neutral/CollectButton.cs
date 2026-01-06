@@ -18,7 +18,6 @@ public class CollectButton : BaseLaunchpadButton<DeadBody>
     public override int MaxUses => 0;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.SoulButton;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => false;
 
     public override bool Enabled(RoleBehaviour? role)
     {

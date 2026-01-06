@@ -17,7 +17,6 @@ public class TeleportButton : BaseLaunchpadButton
     public override float EffectDuration => OptionGroupSingleton<TeleporterOptions>.Instance.TeleportDuration;
     public override int MaxUses => (int)OptionGroupSingleton<TeleporterOptions>.Instance.TeleportUses;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => false;
 
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.TeleportButton;
     public static bool IsZoom { get; private set; }

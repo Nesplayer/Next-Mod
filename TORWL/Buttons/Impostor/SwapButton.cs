@@ -18,7 +18,6 @@ public class SwapButton : BaseLaunchpadButton
     public override int MaxUses => (int)OptionGroupSingleton<SwapshifterOptions>.Instance.SwapUses;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.SwapButton;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => true;
 
     public override bool Enabled(RoleBehaviour? role)
     {

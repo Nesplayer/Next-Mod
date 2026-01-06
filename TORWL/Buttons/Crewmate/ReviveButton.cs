@@ -29,7 +29,6 @@ public class ReviveButton : BaseLaunchpadButton<DeadBody>
 
     public override float Distance => PlayerControl.LocalPlayer.MaxReportDistance / 4f;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => true;
 
     public override bool Enabled(RoleBehaviour? role) => role is MedicRole;
 

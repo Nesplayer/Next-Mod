@@ -22,7 +22,6 @@ public class CurseButton : BaseLaunchpadButton<PlayerControl>
     public override int MaxUses => 0;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.Curse;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => false;
 
     public override bool Enabled(RoleBehaviour? role) => role is PoltergeistRole;
 

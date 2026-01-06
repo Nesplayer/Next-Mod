@@ -15,9 +15,6 @@ public abstract class BaseLaunchpadButton : CustomActionButton
 
     public abstract bool TimerAffectedByPlayer { get; }
 
-    public abstract bool AffectedByHack { get; }
-    public virtual bool UsableInDeath => false;
-
     public override BaseKeybind Keybind => MiraGlobalKeybinds.PrimaryAbility;
 
     public override bool CanUse()
@@ -33,8 +30,6 @@ public abstract class BaseLaunchpadButton<T> : CustomActionButton<T> where T : M
     public override ButtonLocation Location => ButtonLocation.BottomRight;
 
     public abstract bool TimerAffectedByPlayer { get; }
-
-    public abstract bool AffectedByHack { get; }
     
     public override BaseKeybind Keybind => MiraGlobalKeybinds.PrimaryAbility;
 
