@@ -16,10 +16,6 @@ using MiraAPI.Roles;
 using MiraAPI.Modifiers.Types;
 using TORWL.Modifiers;
 using MiraAPI.Modifiers;
-using MiraAPI.GameOptions;
-using MiraAPI.GameOptions.Attributes;
-using MiraAPI.GameOptions.OptionTypes;
-using MiraAPI.Utilities;
 
 namespace TORWL.Features.Wiki
 {
@@ -42,6 +38,9 @@ namespace TORWL.Features.Wiki
         
         private Transform _infoContent;
         private TextMeshProUGUI _roleLongDescription;
+        
+        private Transform _modifierInfoContent;
+        private TextMeshProUGUI _modifierDescription;
         
         private enum ModifierCategory
         {
@@ -200,6 +199,12 @@ namespace TORWL.Features.Wiki
             {
                 _roleLongDescription = FindChildRecursive(_infoContent, "Description")?.GetComponent<TextMeshProUGUI>();
             }
+            
+            _modifierInfoContent = FindChildRecursive(transform, "ModifierInfo");
+            if (_modifierInfoContent != null)
+            {
+                _modifierDescription = FindChildRecursive(_modifierInfoContent, "Description")?.GetComponent<TextMeshProUGUI>();
+            }
 
             var exitBtn = FindChildRecursive(transform, "X")
                 ?.GetComponent<PassiveButton>();
@@ -259,7 +264,7 @@ public void SelectRole(ICustomRole role)
     {
         string baseDescription =
             string.IsNullOrEmpty(role.RoleLongDescription)
-                ? "No description available."
+                ? $"{role.RoleName} has no set description.\nIt is either missing, does not exist or is a different type of role."
                 : role.RoleLongDescription;
 
         _roleLongDescription.text =
@@ -335,7 +340,90 @@ public void SelectRole(ICustomRole role)
         if (child.name.Contains("(Clone)")) Destroy(child);
     }
 }
-        
+
+        [HideFromIl2Cpp]
+        public void SelectModifier(GameModifier mod)
+        {
+            if (mod == null || _modifierInfoContent == null) return;
+
+            if (_modifierDescription != null)
+            {
+                string baseDescription =
+                    string.IsNullOrEmpty(mod.GetDescription())
+                        ? $"{mod.ModifierName} has no set description.\nIt is either missing, does not exist or is a different type of modifier."
+                        : mod.GetDescription();
+
+                _modifierDescription.text =
+                    baseDescription;
+            }
+            var modInfoContainer = FindChildRecursive(_modifierInfoContent, "Info");
+            if (modInfoContainer == null)
+    {
+        Debug.LogWarning("[Wiki] Info container not found in ModifierInfo!");
+        return;
+    }
+
+    var modNameText = modInfoContainer
+        .GetComponentsInChildren<TextMeshProUGUI>(true)
+        .FirstOrDefault(t => t.name.Equals("Name", StringComparison.OrdinalIgnoreCase));
+    if (modNameText != null)
+        modNameText.text = $"<color=#FFFFFF>{mod.ModifierName}</color>";
+    else
+        Debug.LogWarning("[Wiki] Modifier Name text not found in Info!");
+
+    var modIconImage = modInfoContainer
+        .GetComponentsInChildren<Image>(true)
+        .FirstOrDefault(i => i.name.Equals("Icon", StringComparison.OrdinalIgnoreCase));
+    if (modIconImage != null && mod.ModifierIcon != null)
+    {
+        var sprite = mod.ModifierIcon.LoadAsset();
+        if (sprite != null)
+            modIconImage.sprite = sprite;
+        else
+            Debug.LogWarning($"[Wiki] Icon sprite is null for {mod.ModifierName}");
+    }
+    else
+    {
+        Debug.LogWarning("[Wiki] Icon Image not found in Info!");
+    }
+    
+    var modCategory = GetModifierCategoryType(mod);
+
+    var modFactionText = modInfoContainer
+        .GetComponentsInChildren<TextMeshProUGUI>(true)
+        .FirstOrDefault(t => t.name.Equals("FactionText", StringComparison.OrdinalIgnoreCase));
+    if (modFactionText != null)
+    {
+        string faction = modCategory switch
+        {
+            ModifierCategory.Universal => "Universal",
+            ModifierCategory.Crewmate => "Crewmate",
+            ModifierCategory.Impostor => "Impostor",
+            ModifierCategory.Neutral => "Neutral",
+            ModifierCategory.Coven => "Coven",
+            _ => "Unknown"
+        };
+
+        Color col = GetModifierCategoryColor(mod);
+        string hexColor = ColorUtility.ToHtmlStringRGB(col);
+        modFactionText.text = $"<color=#{hexColor}>{faction}</color>";
+    }
+    else
+    {
+        Debug.LogWarning("[Wiki] FactionText not found in Info!");
+    }
+
+    for (int i = _modifierInfoContent.childCount - 1; i >= 0; i--)
+    {
+        var child = _modifierInfoContent.GetChild(i).gameObject;
+        if (child == _modifierDescription?.gameObject) continue;
+        if (child == modNameText?.gameObject) continue;
+        if (child == modIconImage?.gameObject) continue;
+        if (child == modFactionText?.gameObject) continue;
+        if (child.name.Contains("(Clone)")) Destroy(child);
+    }
+        }
+
         [HideFromIl2Cpp]
         public void OnRoleButtonClicked(int roleIndex)
         {
@@ -344,6 +432,16 @@ public void SelectRole(ICustomRole role)
 
             var role = RoleManager.Instance.AllRoles[roleIndex] as ICustomRole;
             SelectRole(role);
+        }
+        
+        [HideFromIl2Cpp]
+        public void OnModifierButtonClicked(int modifierIndex)
+        {
+            if (ModifierManager.Modifiers == null) return;
+            if (modifierIndex < 0 || modifierIndex >= ModifierManager.Modifiers.Count) return;
+
+            var mod = ModifierManager.Modifiers[modifierIndex] as GameModifier;
+            SelectModifier(mod);
         }
 
         [HideFromIl2Cpp]
@@ -443,10 +541,10 @@ public void SelectRole(ICustomRole role)
 
             _modifierButtonTemplate.SetActive(false);
 
-            foreach (var modifier in ModifierManager.Modifiers)
+            for (int i = 0; i < ModifierManager.Modifiers.Count; i++)
             {
-                if (modifier is not GameModifier gameModifier)
-                    continue;
+                var gameModifier = ModifierManager.Modifiers[i] as GameModifier;
+                if (gameModifier == null) continue;
 
                 var button = Instantiate(
                     _modifierButtonTemplate,
@@ -492,6 +590,13 @@ public void SelectRole(ICustomRole role)
 
                 if (tint != null)
                     tint.color = GetModifierCategoryColor(gameModifier);
+                
+                int index = i;
+                var btnComp = button.GetComponent<Button>();
+                if (btnComp != null)
+                {
+                    btnComp.onClick.AddListener(new Action(delegate { OnModifierButtonClicked(index); }));
+                }
             }
 
             Debug.Log("[Wiki] Modifier buttons populated successfully");
