@@ -19,7 +19,6 @@ public class RoleBlockButton : BaseLaunchpadButton<PlayerControl>
     public override int MaxUses => (int)OptionGroupSingleton<TavernKeeperOptions>.Instance.RoleBlockUses;
     public override LoadableAsset<Sprite> Sprite => LaunchpadAssets.RoleBlockButton;
     public override bool TimerAffectedByPlayer => true;
-    public override bool AffectedByHack => true;
 
     public override bool Enabled(RoleBehaviour? role)
     {
