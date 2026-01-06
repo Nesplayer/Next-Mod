@@ -47,7 +47,7 @@ public static class LaunchpadAssets
     public static readonly LoadableAsset<Sprite> Teleporter = new LoadableResourceAsset("TORWLaunchpad.Resources.RoleIcons.Teleporter.png");
     public static readonly LoadableAsset<Sprite> Survivor = new LoadableResourceAsset("TORWLaunchpad.Resources.RoleIcons.Survivor.png");
 
-    // Role Button Icons
+    // Role Buttons
     public static readonly LoadableAsset<Sprite> RoleBlockButton = new LoadableBundleAsset<Sprite>("RoleBlock.png", Icons);
     public static readonly LoadableAsset<Sprite> SilenceButton = new LoadableResourceAsset("TORWLaunchpad.Resources.Buttons.Silence.png");
     public static readonly LoadableAsset<Sprite> Toxify = new LoadableResourceAsset("TORWLaunchpad.Resources.Buttons.Toxify.png");
@@ -80,11 +80,12 @@ public static class LaunchpadAssets
     public static readonly LoadableAsset<Sprite> Body = new LoadableBundleAsset<Sprite>("Body.png", Ability);
     public static readonly LoadableAsset<Sprite> Vent = new LoadableBundleAsset<Sprite>("Vent.png", Ability);
 
-    //Menu Button Icons
+    //Menu Buttons/Icons
     public static readonly LoadableAsset<Sprite> EditIcon = new LoadableResourceAsset("TORWLaunchpad.Resources.MenuIcons.Edit.png");
     public static readonly LoadableAsset<Sprite> ViewIcon = new LoadableResourceAsset("TORWLaunchpad.Resources.MenuIcons.View.png");
     public static readonly LoadableAsset<Sprite> RolesIcon = new LoadableResourceAsset("TORWLaunchpad.Resources.MenuIcons.Roles.png");
     public static readonly LoadableAsset<Sprite> ModifiersIcon = new LoadableResourceAsset("TORWLaunchpad.Resources.MenuIcons.Modifiers.png");
+    public static readonly LoadableAsset<Sprite> WikiButton = new LoadableResourceAsset("TORWLaunchpad.Resources.Buttons.WikiButton.png");
     public static readonly LoadableAsset<Sprite> NewsButtonIcon = new LoadableResourceAsset("TORWLaunchpad.Resources.Mega.png");
     
     // Banners
