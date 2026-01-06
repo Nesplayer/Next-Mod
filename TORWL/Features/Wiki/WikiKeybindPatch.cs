@@ -4,29 +4,19 @@ using MiraAPI.Utilities.Assets;
 
 namespace TORWL.Features.Wiki
 {
-    [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
-    public static class WikiKeybindPatch
+    public static class WikiOpener
     {
-        public static void Postfix(HudManager __instance)
+        public static void Toggle(HudManager hud)
         {
-            if (AmongUsClient.Instance == null) return;
-
-            if (Input.GetKeyDown(KeyCode.F3))
-            {
-                if (WikiPanel.Instance == null)
-                {
-                    OpenWiki(__instance);
-                }
-                else
-                {
-                    WikiPanel.Instance.Close();
-                }
-            }
+            if (WikiPanel.Instance == null)
+                Open(hud);
+            else
+                WikiPanel.Instance.Close();
         }
 
-        private static void OpenWiki(HudManager hud)
+        public static void Open(HudManager hud)
         {
-            GameObject? prefab = LaunchpadAssets.WikiPrefab?.LoadAsset();
+            GameObject prefab = LaunchpadAssets.WikiPrefab?.LoadAsset();
             if (prefab == null)
             {
                 Debug.LogError("Wiki Prefab not found in LaunchpadAssets!");
@@ -38,6 +28,20 @@ namespace TORWL.Features.Wiki
             wikiObj.transform.localScale = Vector3.one;
 
             wikiObj.AddComponent<WikiPanel>();
+        }
+    }
+    
+    [HarmonyPatch(typeof(HudManager), nameof(HudManager.Update))]
+    public static class WikiKeybindPatch
+    {
+        public static void Postfix(HudManager __instance)
+        {
+            if (AmongUsClient.Instance == null) return;
+
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                WikiOpener.Toggle(__instance);
+            }
         }
     }
 }
