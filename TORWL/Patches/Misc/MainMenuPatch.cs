@@ -5,8 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Linq;
 using Rewired.Platforms.Custom;
 using MiraAPI.Utilities;
+using UnityEngine.Events;
+using Object = UnityEngine.Object;
 
 namespace TORWL.Patches.Misc
 {
@@ -137,7 +140,6 @@ namespace TORWL.Patches.Misc
     [HarmonyPatch(typeof(GameStartManager), nameof(GameStartManager.Start))]
     public static class GameStartPatch
     {
-
         public static void Postfix(GameStartManager __instance)
         {
             HostViewButtonColor(__instance.HostViewButton, true);
@@ -145,6 +147,117 @@ namespace TORWL.Patches.Misc
             ClientViewButtonColor(__instance.ClientViewButton, true);
             if (__instance.LobbyInfoPane != null)
                 PaneColor(__instance.LobbyInfoPane);
+            
+            AddClientWikiButton(__instance.ClientViewButton);
+            AddHostWikiButton(__instance.HostViewButton);
+        }
+        
+        private static PassiveButton? _clientWikiButton;
+        private static PassiveButton? _hostWikiButton;
+
+        private static void AddClientWikiButton(PassiveButton templateButton)
+        {
+            if (templateButton == null || _clientWikiButton != null)
+                return;
+
+            // Clone the button
+            GameObject wikiObj = Object.Instantiate(templateButton.gameObject, templateButton.transform.parent);
+            wikiObj.name = "WikiButton";
+
+            _clientWikiButton = wikiObj.GetComponent<PassiveButton>();
+            if (_clientWikiButton == null) return;
+
+            // Destroy old UnityEvent entirely (clean slate)
+            _clientWikiButton.OnClick.RemoveAllListeners();
+            _clientWikiButton.OnClick = new Button.ButtonClickedEvent();
+
+            // Add listener using a normal method
+            _clientWikiButton.OnClick.AddListener(new Action(() =>
+            {
+                if (HudManager.Instance == null) return;
+                WikiOpener.Toggle(HudManager.Instance);
+            }));
+            
+            Sprite wikiIcon = LaunchpadAssets.WikiButton.LoadAsset(); // or your WikiIcon
+            if (wikiIcon != null)
+                SetWikiButtonIcon(_clientWikiButton, wikiIcon);
+
+            // Change button text
+            var text = wikiObj.GetComponentInChildren<TextMeshPro>(true); // look in inactive children
+            if (text != null)
+            {
+                text.text = "Wiki";
+            }
+            else
+            {
+                Debug.LogWarning("[Wiki] Could not find Text_TMP in WikiButton!");
+            }
+
+            // Nudge button so it doesn't overlap
+            wikiObj.transform.localPosition = new Vector3(-0.063f, -0.905f, 0f);
+        }
+        
+        private static void AddHostWikiButton(PassiveButton templateButton)
+        {
+            if (templateButton == null || _hostWikiButton != null)
+                return;
+
+            // Clone the button
+            GameObject wikiObj = Object.Instantiate(templateButton.gameObject, templateButton.transform.parent);
+            wikiObj.name = "WikiButton";
+
+            _hostWikiButton = wikiObj.GetComponent<PassiveButton>();
+            if (_hostWikiButton == null) return;
+
+            // Destroy old UnityEvent entirely (clean slate)
+            _hostWikiButton.OnClick.RemoveAllListeners();
+            _hostWikiButton.OnClick = new Button.ButtonClickedEvent();
+
+            // Add listener using a normal method
+            _hostWikiButton.OnClick.AddListener(new Action(() =>
+            {
+                if (HudManager.Instance == null) return;
+                WikiOpener.Toggle(HudManager.Instance);
+            }));
+            
+            Sprite wikiIcon = LaunchpadAssets.WikiButton.LoadAsset(); // or your WikiIcon
+            if (wikiIcon != null)
+                SetWikiButtonIcon(_hostWikiButton, wikiIcon);
+
+            // Change button text
+            var text = wikiObj.GetComponentInChildren<TextMeshPro>(true); // look in inactive children
+            if (text != null)
+            {
+                text.text = "Wiki";
+            }
+            else
+            {
+                Debug.LogWarning("[Wiki] Could not find Text_TMP in WikiButton!");
+            }
+
+            // Nudge button so it doesn't overlap
+            wikiObj.transform.localPosition = new Vector3(-0.963f, -0.905f, 0f);
+        }
+        
+        private static void SetWikiButtonIcon(PassiveButton button, Sprite icon)
+        {
+            if (button.activeSprites != null && button.activeSprites.transform.childCount > 0)
+            {
+                var activeSprite = button.activeSprites.transform.GetChild(0).GetComponent<SpriteRenderer>();
+                if (activeSprite != null) activeSprite.sprite = icon;
+            }
+
+            if (button.inactiveSprites != null && button.inactiveSprites.transform.childCount > 0)
+            {
+                var inactiveSprite = button.inactiveSprites.transform.GetChild(0).GetComponent<SpriteRenderer>();
+                if (inactiveSprite != null) inactiveSprite.sprite = icon;
+            }
+
+            if (button.selectedSprites != null && button.selectedSprites.transform.childCount > 0)
+            {
+                var selectedSprite = button.selectedSprites.transform.GetChild(0).GetComponent<SpriteRenderer>();
+                if (selectedSprite != null) selectedSprite.sprite = icon;
+            }
         }
 
         private static void HostViewButtonColor(PassiveButton Button, bool shine)
@@ -266,6 +379,9 @@ namespace TORWL.Patches.Misc
             if (sr == null) return;
 
             sr.color = Palette.CrewmateRoleBlue;
+
+            background.transform.localScale = new Vector3(1.0209f, 1.1209f, 1f);
+            background.transform.localPosition = new Vector3(-1.9918f, -3.9459f, 0f);
         }
     }
 }
