@@ -13,6 +13,7 @@ using HarmonyLib;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using TORWL.Features;
 using Reactor.Utilities;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 

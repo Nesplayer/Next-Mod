@@ -83,7 +83,7 @@
       "Title": "TOR-W: Launchpad v1.1.2",
       "Text": [
         "\rThis update adds some menu changes, and some role selecting features. Such as selecting the amount of the actual modifier can spawn per game, and more!",
-        "\n\n<b>└ Added ┐</b>:",
+        "\n<b>└ Added ┐</b>:",
         "\n★ Added Custom Announcements.",
         "\n★ Added icons for Modifiers.",
         "\n\n<b>└ Updated ┐</b>:",
@@ -109,7 +109,7 @@
       "Title": "TOR-W: Launchpad v1.2.0 Dev-1 & Dev-2",
       "Text": [
         "\rThis is <b>NOT</b> the final changelogs for v1.2.0!!! Just some stuff I added in Dev-1 & Dev-2.",
-        "\n\n<b>└ Added ┐</b>:",
+        "\n<b>└ Added ┐</b>:",
         "\n★ Added Dark Fairy (WIP).",
         "\n★ Added Tavern Keeper (aka Witch Doctor renamed).",
         "\n★ Added Burst Modifier.",
@@ -135,7 +135,7 @@
       "Title": "TOR-W: Launchpad v2.0-r",
       "Text": [
         "\rPlease do note, that the mod in Among us shows '2.0.0-r', and not '2.0-r'. This is <b>NOT</b> a mistake, it has to be loaded like that into Among us, otherwise the build fails.\n\nThank you.",
-        "\n\n<b>└ Added ┐</b>:",
+        "\n<b>└ Added ┐</b>:",
         "\n★ Added TOR-W: L to Starlight for mobile players.",
         "\n★ Added the new TOR-W:L logo.",
         "\n★ Added new icons for the buttons in the main menu for Halloween (Starting 1 Nov and ending 7 Nov).",
@@ -165,7 +165,7 @@
       "SubTitle": "Newest Features",
       "Title": "TOR-W: Launchpad v2.0-f",
       "Text": [
-        "\n\n<b>└ Added ┐</b>:",
+        "\r\n<b>└ Added ┐</b>:",
         "\n★ A new role: Silencer (80% done).",
         "\n★ Added visible player tags for Role Blocked and Silenced.",
         "\n\n<b>└ Changes ┐</b>:",
@@ -186,7 +186,7 @@
       "SubTitle": "New Release!",
       "Title": "TOR-W: Launchpad v2.1-r",
       "Text": [
-        "\n\n<b>└ Added ┐</b>:",
+        "\r\n<b>└ Added ┐</b>:",
         "\n★ Added four new roles:\n♦ Silencer.\n♦ Toxifier.\n♦ Poltergeist.\n♦ Survivor.",
         "\n★ Added public notifications if someone is silenced and gets toxified.",
         "\n★ Added three new sounds for Toxifier, Poltergeist and Tavern Keeper.",
@@ -206,14 +206,14 @@
     },
     {
       "Date": "2026-01-08T12:50:00Z",
-      "Number": "100011",
+      "Number": "100010",
       "ShortTitle": "★ TOR-W: L v3.0-r ★",
       "SubTitle": "Part one of the full release!",
       "Title": "TOR-W: Launchpad v3.0-r",
       "Text": [
-        "<b>This release is the first part of the big update. It will be split between two to three major versions, meaning all that ends with \"-r\" will have major things in it.\nThis is because the test versions will add the testable versions of the features/roles.</b>",
-        "\n\n<b>└ Added ┐</b>:",
-        "\n★ Added <b>two</b> new <color=#8BFDFD>Coven</color> roles:\n- Seer.\n- Potionist.",
+        "\r<b>This release is the first part of the big update. It will be split between two to three major versions, meaning all that ends with \"-r\" will have major things in it.\nThis is because the test versions will add the testable versions of the features/roles.</b>",
+        "\n<b>└ Added ┐</b>:",
+        "\n★ Added <b>two</b> new Coven roles:\n- Seer.\n- Potionist.",
         "\n★ Added a wiki for the mod roles and modifiers!",
         "\n★ Added two local buttons:\n- A Set Role button.\n- A Wiki Button.",
         "\n★ Added Wiki buttons in the lobby pane.",
