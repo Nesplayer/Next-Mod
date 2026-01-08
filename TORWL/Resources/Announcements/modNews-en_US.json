@@ -211,6 +211,7 @@
       "SubTitle": "Part one of the full release!",
       "Title": "TOR-W: Launchpad v3.0-r",
       "Text": [
+        "<b>This release is the first part of the big update. It will be split between two to three major versions, meaning all that ends with \"-r\" will have major things in it.\nThis is because the test versions will add the testable versions of the features/roles.</b>",
         "\n\n<b>└ Added ┐</b>:",
         "\n★ Added <b>two</b> new <color=#8BFDFD>Coven</color> roles:\n- Seer.\n- Potionist.",
         "\n★ Added a wiki for the mod roles and modifiers!",
