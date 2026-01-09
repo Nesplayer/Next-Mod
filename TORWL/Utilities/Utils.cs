@@ -51,7 +51,9 @@ namespace TORWL.Utilities
         {
             return role.Faction switch
             {
-                TORWLFactions.Controller => $"<b><color=#9013FE>Coven Controller</color></b>",
+                TORWLFactions.Hexcraft => $"<b><color=#8E44AD>Coven Hexcraft</color></b>",
+                TORWLFactions.Alchemica => $"<b><color=#2ECC71>Coven Alchemica</color></b>",
+                TORWLFactions.Dominion => $"<b><color=#9B59B6>Coven Dominion</color></b>",
                 _ => $"Unknown"
             };
         }

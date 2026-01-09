@@ -10,7 +10,9 @@
         Saboteur,
         Stealth,
         // Covens
-        Controller,
+        Hexcraft,
+        Alchemica,
+        Dominion,
         // Neutrals
         NeutKilling,
         Benign,
