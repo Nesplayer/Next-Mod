@@ -17,7 +17,7 @@ public class WikiButton : BaseLaunchpadButton
 
     public override bool Enabled(RoleBehaviour? role)
     {
-        return PlayerControl.LocalPlayer != null;
+        return PlayerControl.LocalPlayer != null && TutorialManager.InstanceExists;
     }
 
     protected override void OnClick()
