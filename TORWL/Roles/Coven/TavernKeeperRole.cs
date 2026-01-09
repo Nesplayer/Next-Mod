@@ -14,6 +14,7 @@ public class TavernKeeperRole(System.IntPtr ptr) : RoleBehaviour(ptr), ICovenRol
     public string RoleDescription => "Use magic against the crew.";
     public string RoleLongDescription => "Use your role block ability to\nstop players from using their ability";
     public Color RoleColor => LaunchpadPalette.TavernKeeperColor;
+    public TORWLFactions Faction => TORWLFactions.Controller;
     public override bool IsDead => false;
 
     public CustomRoleConfiguration Configuration => new CustomRoleConfiguration(this)

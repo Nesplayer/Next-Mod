@@ -16,6 +16,7 @@ namespace TORWL.Roles.Impostor
         public string RoleLongDescription => "You eliminate others by applying toxins instead of direct attacks.\nWhen you poison a player, they won\'t die instantly.\nYour goal is to infect targets without being noticed.\nUse timing, positioning, and subtle interactions to avoid suspicion while\nyour toxins finish the job.";
         public Color RoleColor => LaunchpadPalette.ToxifierColor;
         public ModdedRoleTeams Team => ModdedRoleTeams.Impostor;
+        public TORWLFactions Faction => TORWLFactions.Stealth;
 
         public CustomRoleConfiguration Configuration => new(this)
         {

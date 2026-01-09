@@ -2,6 +2,9 @@
 using MiraAPI.GameOptions;
 using MiraAPI.Roles;
 using UnityEngine;
+using System.Text;
+using Il2CppInterop.Runtime.Attributes;
+using TORWL.Utilities;
 
 namespace TORWL.Roles.Neutral
 {
@@ -15,6 +18,22 @@ namespace TORWL.Roles.Neutral
         TeamIntroConfiguration? ICustomRole.IntroConfiguration =>
             new TeamIntroConfiguration(Color.gray, "NEUTRAL", 
                 "You are a Neutral. You do not have a team.");
+        
+        public TORWLFactions Faction { get; }
+        public static StringBuilder GetRoleTabText(ICustomRole role)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine($"{role.RoleColor.ToTextColor()}You are <b>{role.RoleName}</b></color>");
+            sb.AppendLine($"<size=65%>Faction: {Utils.GetNeutralFactionDisplay((INeutralRole)role)}</size>");
+            sb.AppendLine($"<size=70%>{role.RoleLongDescription}</size>");
+            return sb;
+        }
+
+        [HideFromIl2Cpp]
+        StringBuilder ICustomRole.SetTabText()
+        {
+            return GetRoleTabText(this);
+        }
     }
     public static class NeutralRoleExtensions
     {

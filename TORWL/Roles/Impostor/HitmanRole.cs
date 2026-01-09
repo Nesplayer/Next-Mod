@@ -18,6 +18,7 @@ public class HitmanRole(IntPtr ptr) : ImpostorRole(ptr), IImpostorRole
     public string RoleLongDescription => "Slow down time and kill the Crewmates.\nYou can kill multiple players at once.";
     public Color RoleColor => LaunchpadPalette.HitmanColor;
     public ModdedRoleTeams Team => ModdedRoleTeams.Impostor;
+    public TORWLFactions Faction => TORWLFactions.Saboteur;
     public CustomRoleConfiguration Configuration => new(this)
     {
         Icon = LaunchpadAssets.Hitman,

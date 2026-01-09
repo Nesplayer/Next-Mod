@@ -17,6 +17,7 @@ public class ReaperRole(System.IntPtr ptr) : RoleBehaviour(ptr), INeutralRole
     public string RoleDescription => "Collect souls to win";
     public string RoleLongDescription => "Collect souls from dead bodies to win the game.";
     public Color RoleColor => LaunchpadPalette.ReaperColor;
+    public TORWLFactions Faction => TORWLFactions.Benign;
     public override bool IsDead => false;
 
     public int collectedSouls;

@@ -12,6 +12,7 @@ public class OutcastGhostRole(IntPtr ptr) : RoleBehaviour(ptr), INeutralRole, IA
     public string RoleDescription => string.Empty;
     public string RoleLongDescription => string.Empty;
     public Color RoleColor => Color.gray;
+    public TORWLFactions Faction => TORWLFactions.Benign;
 
     public CustomRoleConfiguration Configuration => new(this)
     {

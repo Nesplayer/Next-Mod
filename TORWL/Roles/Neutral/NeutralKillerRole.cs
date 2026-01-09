@@ -17,6 +17,7 @@ public class NeutralKillerRole(System.IntPtr ptr) : RoleBehaviour(ptr), INeutral
     public string RoleLongDescription => "Neutral who can kill.\nKill players to win the game alone. Seems quite easy right?";
 
     public Color RoleColor => LaunchpadPalette.NeutralKillerColor;
+    public TORWLFactions Faction => TORWLFactions.NeutKilling;
 
     public override bool IsDead => false;
 

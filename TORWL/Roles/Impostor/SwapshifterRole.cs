@@ -14,6 +14,7 @@ public class SwapshifterRole(IntPtr ptr) : ImpostorRole(ptr), IImpostorRole
     public string RoleLongDescription => RoleDescription + "\nThis can help you frame players and disguise kills.";
     public Color RoleColor => LaunchpadPalette.SwapperColor;
     public ModdedRoleTeams Team => ModdedRoleTeams.Impostor;
+    public TORWLFactions Faction => TORWLFactions.Stealth;
     public CustomRoleConfiguration Configuration => new(this)
     {
         Icon = LaunchpadAssets.Swapshifter,

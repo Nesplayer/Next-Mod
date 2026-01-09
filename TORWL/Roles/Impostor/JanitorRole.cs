@@ -14,6 +14,7 @@ public class JanitorRole(IntPtr ptr) : ImpostorRole(ptr), IImpostorRole
     public string RoleLongDescription => "You can drag bodies and hide them in vents\nWhich will cause them to disappear unless the vent is used.";
     public Color RoleColor => LaunchpadPalette.JanitorColor;
     public ModdedRoleTeams Team => ModdedRoleTeams.Impostor;
+    public TORWLFactions Faction => TORWLFactions.Stealth;
     public CustomRoleConfiguration Configuration => new(this)
     {
         Icon = LaunchpadAssets.Janitor,

@@ -12,6 +12,7 @@ public class MedicRole(IntPtr ptr) : CrewmateRole(ptr), ICrewmateRole
     public string RoleLongDescription => "Use your revive ability to bring dead bodies\nback to life!";
     public Color RoleColor => LaunchpadPalette.MedicColor;
     public ModdedRoleTeams Team => ModdedRoleTeams.Crewmate;
+    public TORWLFactions Faction => TORWLFactions.Support;
     public CustomRoleConfiguration Configuration => new(this)
     {
         Icon = LaunchpadAssets.Medic,

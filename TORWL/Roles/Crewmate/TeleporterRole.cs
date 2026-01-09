@@ -13,6 +13,7 @@ public class TeleporterRole(IntPtr ptr) : CrewmateRole(ptr), ICrewmateRole
     public string RoleDescription => RoleLongDescription;
     public Color RoleColor => LaunchpadPalette.TeleporterColor;
     public ModdedRoleTeams Team => ModdedRoleTeams.Crewmate;
+    public TORWLFactions Faction => TORWLFactions.Support;
 
     public CustomRoleConfiguration Configuration => new CustomRoleConfiguration(this)
     {

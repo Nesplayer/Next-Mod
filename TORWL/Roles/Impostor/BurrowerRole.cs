@@ -14,6 +14,7 @@ public class BurrowerRole(IntPtr ptr) : ImpostorRole(ptr), IImpostorRole
     public string RoleLongDescription => "Move around the map easier\nBy digging new vents.";
     public Color RoleColor => LaunchpadPalette.BurrowerColor;
     public ModdedRoleTeams Team => ModdedRoleTeams.Impostor;
+    public TORWLFactions Faction => TORWLFactions.Stealth;
     public CustomRoleConfiguration Configuration => new(this)
     {
         Icon = LaunchpadAssets.Burrower,

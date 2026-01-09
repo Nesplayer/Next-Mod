@@ -24,6 +24,7 @@ public class ExecutionerRole(System.IntPtr ptr) : RoleBehaviour(ptr), INeutralRo
     public string RoleDescription => $"Get <b>{(target ? target!.Data.PlayerName : "your target")}</b> voted out to win.";
     public string RoleLongDescription => RoleDescription;
     public Color RoleColor => LaunchpadPalette.ExecutionerColor;
+    public TORWLFactions Faction => TORWLFactions.Evil;
     public override bool IsDead => false;
 
     public CustomRoleConfiguration Configuration => new(this)

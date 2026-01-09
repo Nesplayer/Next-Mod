@@ -25,6 +25,7 @@ public class TraitorRole(System.IntPtr ptr) : RoleBehaviour(ptr), INeutralRole
     public string RoleDescription => "Betray your fellow <color=#ff0000>Impostor</color> friends and win!";
     public ModdedRoleTeams Team => ModdedRoleTeams.Custom;
     public Color RoleColor => LaunchpadPalette.TraitorColor;
+    public TORWLFactions Faction => TORWLFactions.Evil;
     public override bool IsDead => false;
 
     public CustomRoleConfiguration Configuration => new CustomRoleConfiguration(this)

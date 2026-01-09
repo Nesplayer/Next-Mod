@@ -17,6 +17,7 @@ public class SurvivorRole(System.IntPtr ptr) : RoleBehaviour(ptr), INeutralRole
     public string RoleLongDescription => RoleDescription;
 
     public Color RoleColor => LaunchpadPalette.SurvivorColor;
+    public TORWLFactions Faction => TORWLFactions.Benign;
 
     public override bool IsDead => false;
 

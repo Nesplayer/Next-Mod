@@ -16,6 +16,7 @@ public class JesterRole(System.IntPtr ptr) : RoleBehaviour(ptr), INeutralRole
     public string RoleDescription => "Get ejected to win";
     public string RoleLongDescription => "Convince the crew to vote you out by being suspicious.\nIf you get voted out, you win the game.";
     public Color RoleColor => LaunchpadPalette.JesterColor;
+    public TORWLFactions Faction => TORWLFactions.Trickster;
     public override bool IsDead => false;
 
     public CustomRoleConfiguration Configuration => new(this)
