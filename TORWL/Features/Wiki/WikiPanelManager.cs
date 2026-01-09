@@ -421,7 +421,7 @@ namespace TORWL.Features.Wiki
                 var role = roles[i];
                 if (role == null) continue;
 
-                string factionDisplay = role switch
+                string? factionDisplay = role switch
                 {
                     ICrewmateRole crewmate => Utils.GetCrewmateFactionDisplay(crewmate),
                     IImpostorRole impostor => Utils.GetImpostorFactionDisplay(impostor),
