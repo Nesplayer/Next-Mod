@@ -183,14 +183,14 @@ namespace TORWL.Patches.Misc
                 SetWikiButtonIcon(_clientWikiButton, wikiIcon);
 
             // Change button text
-            var text = wikiObj.GetComponentInChildren<TextMeshPro>(true); // look in inactive children
+            var text = wikiObj.GetComponentInChildren<TextMeshPro>(true);
             if (text != null)
             {
+                var translator = text.GetComponent<TextTranslatorTMP>();
+                if (translator != null)
+                    Object.Destroy(translator);
+
                 text.text = "Wiki";
-            }
-            else
-            {
-                Debug.LogWarning("[Wiki] Could not find Text_TMP in WikiButton!");
             }
 
             // Nudge button so it doesn't overlap
@@ -225,14 +225,14 @@ namespace TORWL.Patches.Misc
                 SetWikiButtonIcon(_hostWikiButton, wikiIcon);
 
             // Change button text
-            var text = wikiObj.GetComponentInChildren<TextMeshPro>(true); // look in inactive children
+            var text = wikiObj.GetComponentInChildren<TextMeshPro>(true);
             if (text != null)
             {
+                var translator = text.GetComponent<TextTranslatorTMP>();
+                if (translator != null)
+                    Object.Destroy(translator);
+
                 text.text = "Wiki";
-            }
-            else
-            {
-                Debug.LogWarning("[Wiki] Could not find Text_TMP in WikiButton!");
             }
 
             // Nudge button so it doesn't overlap
