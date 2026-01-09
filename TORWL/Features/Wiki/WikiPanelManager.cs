@@ -449,7 +449,7 @@ namespace TORWL.Features.Wiki
 
                 if (factionText != null)
                 {
-                    factionText.richText = false;
+                    factionText.richText = true;
                     factionText.fontSize = 33f;
                     factionText.text = factionDisplay;
                 }
