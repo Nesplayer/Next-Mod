@@ -15,6 +15,7 @@ using MiraAPI.Roles;
 using MiraAPI.Modifiers.Types;
 using TORWL.Modifiers;
 using MiraAPI.Modifiers;
+using TORWL.Utilities;
 
 namespace TORWL.Features.Wiki
 {
@@ -294,20 +295,19 @@ namespace TORWL.Features.Wiki
             var factionText = infoContainer
                 .GetComponentsInChildren<TextMeshProUGUI>(true)
                 .FirstOrDefault(t => t.name.Equals("FactionText", StringComparison.OrdinalIgnoreCase));
+
             if (factionText != null)
             {
-                string faction = role switch
+                factionText.richText = true;
+
+                factionText.text = role switch
                 {
-                    ICrewmateRole => "Crewmate",
-                    IImpostorRole => "Impostor",
-                    INeutralRole => "Neutral",
-                    ICovenRole => "Coven",
+                    ICrewmateRole crewmate => Utils.GetCrewmateFactionDisplay(crewmate),
+                    IImpostorRole impostor => Utils.GetImpostorFactionDisplay(impostor),
+                    INeutralRole neutral   => Utils.GetNeutralFactionDisplay(neutral),
+                    ICovenRole coven       => Utils.GetCovenFactionDisplay(coven),
                     _ => "Unknown"
                 };
-
-                Color col = GetFactionColor(faction);
-                string hexColor = ColorUtility.ToHtmlStringRGB(col);
-                factionText.text = $"<color=#{hexColor}>{faction}</color>";
             }
 
             for (int i = _infoContent.childCount - 1; i >= 0; i--)
@@ -421,12 +421,17 @@ namespace TORWL.Features.Wiki
                 var role = roles[i];
                 if (role == null) continue;
 
-                string faction;
-                if (role is ICrewmateRole) faction = "Crewmate";
-                else if (role is IImpostorRole) faction = "Impostor";
-                else if (role is INeutralRole) faction = "Neutral";
-                else if (role is ICovenRole) faction = "Coven";
-                else continue;
+                string factionDisplay = role switch
+                {
+                    ICrewmateRole crewmate => Utils.GetCrewmateFactionDisplay(crewmate),
+                    IImpostorRole impostor => Utils.GetImpostorFactionDisplay(impostor),
+                    INeutralRole neutral   => Utils.GetNeutralFactionDisplay(neutral),
+                    ICovenRole coven       => Utils.GetCovenFactionDisplay(coven),
+                    _ => null
+                };
+
+                if (factionDisplay == null)
+                    continue;
 
                 var button = Instantiate(_buttonTemplate, _contentRoot);
                 button.SetActive(true);
@@ -438,8 +443,29 @@ namespace TORWL.Features.Wiki
                 var nameText = button.GetComponentInChildren<TextMeshProUGUI>(true);
                 if (nameText != null) nameText.text = roleName;
 
-                var factionText = button.transform.Find("Faction/RoleFactionText")?.GetComponent<TextMeshProUGUI>();
-                if (factionText != null) factionText.text = faction;
+                var factionText = button.transform
+                    .Find("Faction/RoleFactionText")
+                    ?.GetComponent<TextMeshProUGUI>();
+
+                if (factionText != null)
+                {
+                    factionText.richText = false;
+                    factionText.fontSize = 33f;
+                    factionText.text = factionDisplay;
+                }
+
+                var tintImage = button.transform.Find("Tint")?.GetComponent<Image>();
+                if (tintImage != null)
+                {
+                    tintImage.color = role switch
+                    {
+                        ICrewmateRole => LaunchpadPalette.Crewmate,
+                        IImpostorRole => LaunchpadPalette.Impostor,
+                        INeutralRole => LaunchpadPalette.Neutral,
+                        ICovenRole => LaunchpadPalette.Coven,
+                        _ => Color.black
+                    };
+                }
 
                 var icon = button.transform.Find("RoleIcon")?.GetComponent<Image>();
                 var roleBehaviour = role as ICustomRole;
@@ -448,9 +474,6 @@ namespace TORWL.Features.Wiki
                     var sprite = roleBehaviour.Configuration.Icon.LoadAsset();
                     if (sprite != null) icon.sprite = sprite;
                 }
-
-                var tintImage = button.transform.Find("Tint")?.GetComponent<Image>();
-                if (tintImage != null) tintImage.color = GetFactionColor(faction);
                 
                 int index = i;
                 var btnComp = button.GetComponent<Button>();
