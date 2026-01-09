@@ -66,46 +66,6 @@ public partial class TORWLPlugin : BasePlugin, IMiraPlugin
         SettingsInstance = new LaunchpadSettings(Config);
 
         Harmony.PatchAll();
-        
-        try
-        {
-            string pluginPath = Paths.PluginPath;
-            UnityEngine.Debug.Log($"[TORWL] Paths.PluginPath = {pluginPath}");
-
-            string folder = Path.Combine(pluginPath, "TORWL");
-            UnityEngine.Debug.Log($"[TORWL] Target folder path = {folder}");
-
-            Directory.CreateDirectory(folder);
-
-            bool folderExists = Directory.Exists(folder);
-            UnityEngine.Debug.Log($"[TORWL] Folder exists after CreateDirectory(): {folderExists}");
-
-            string filePath = Path.Combine(folder, "welcome.txt");
-            UnityEngine.Debug.Log($"[TORWL] Target file path = {filePath}");
-
-            string defaultText =
-                @"Welcome to the lobby!\n<b>Have fun!</b>\n<color=#00FF00>Enjoy the game</color>";
-
-            if (!File.Exists(filePath))
-            {
-                UnityEngine.Debug.Log("[TORWL] welcome.txt does not exist, creating it now...");
-                File.WriteAllText(filePath, defaultText);
-            }
-            else
-            {
-                UnityEngine.Debug.Log("[TORWL] welcome.txt already exists.");
-            }
-
-            bool fileExists = File.Exists(filePath);
-            UnityEngine.Debug.Log($"[TORWL] File exists after WriteAllText(): {fileExists}");
-
-            string welcomeText = File.ReadAllText(filePath);
-            UnityEngine.Debug.Log($"[TORWL] File contents loaded successfully:\n{welcomeText}");
-        }
-        catch (System.Exception ex)
-        {
-            UnityEngine.Debug.LogError($"[TORWL] FILE IO ERROR:\n{ex}");
-        }
 
         if (IsBetaBuild)
         {
