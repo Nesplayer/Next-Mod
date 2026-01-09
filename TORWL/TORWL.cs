@@ -66,7 +66,7 @@ public partial class TORWLPlugin : BasePlugin, IMiraPlugin
         SettingsInstance = new LaunchpadSettings(Config);
 
         Harmony.PatchAll();
-
+        
         try
         {
             string pluginPath = Paths.PluginPath;
@@ -84,7 +84,7 @@ public partial class TORWLPlugin : BasePlugin, IMiraPlugin
             UnityEngine.Debug.Log($"[TORWL] Target file path = {filePath}");
 
             string defaultText =
-            @"Welcome to the lobby!\n<b>Have fun!</b>\n<color=#00FF00>Enjoy the game</color>";
+                @"Welcome to the lobby!\n<b>Have fun!</b>\n<color=#00FF00>Enjoy the game</color>";
 
             if (!File.Exists(filePath))
             {
