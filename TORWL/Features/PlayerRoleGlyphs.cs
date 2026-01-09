@@ -12,7 +12,6 @@ namespace TORWL.Features
     {
         public static bool CanLocalPlayerSeeRole(RoleBehaviour role)
         {
-            // Fix CS8600: Added ? because 'as' can return null
             ICustomRole? customRole = role as ICustomRole;
             if (customRole != null)
             {
@@ -31,8 +30,7 @@ namespace TORWL.Features
                 GameObject gameObject = new GameObject("RoleIcon");
                 gameObject.transform.SetParent(e.Player.cosmetics.nameTextContainer.transform);
                 gameObject.transform.localPosition = new Vector3(0f, 0.4f, 0f);
-                
-                // Fixed possible null reference for sprite
+
                 Sprite? roleIcon = RoleIcons.GetRoleIcon(role);
                 if (roleIcon != null)
                 {
@@ -50,11 +48,9 @@ namespace TORWL.Features
 
         public static void TryClearRoleIcon(PlayerControl player)
         {
-            // Fix CS8600: FindChild might return null
             Transform? transform = player.cosmetics.nameTextContainer.transform.FindChild("RoleIcon");
             GameObject? gameObject = (transform != null) ? transform.gameObject : null;
-            
-            // Fix CS8602: Only call Destroy if gameObject isn't null
+
             if (gameObject != null)
             {
                 gameObject.Destroy();
@@ -63,18 +59,16 @@ namespace TORWL.Features
 
         public static Sprite? GetRoleIcon(RoleBehaviour role)
         {
-            // Fix CS8600: Added ?
             ICustomRole? customRole = role as ICustomRole;
             if (customRole == null)
             {
                 return role.RoleIconSolid;
             }
-            
-            // Fix CS8600: Added ?
+
             LoadableAsset<Sprite>? icon = customRole.Configuration.Icon;
             if (icon == null)
             {
-                return null; // Fix CS8603: Method return type now allows null
+                return null;
             }
             return icon.LoadAsset();
         }

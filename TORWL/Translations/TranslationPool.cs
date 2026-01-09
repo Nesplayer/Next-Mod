@@ -4,7 +4,6 @@ namespace TORWL.Translations
 {
     public struct TranslationPool
     {
-        // Fields marked with ? allow null values
         public string English;
         public string? Spanish;
         public string? French;
