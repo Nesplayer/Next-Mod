@@ -15,7 +15,7 @@ public class SealerRole(IntPtr ptr) : CrewmateRole(ptr), ICrewmateRole
     public string RoleLongDescription => "Seal vents around the map.\nThis will prevent anyone from entering the vent.";
     public Color RoleColor => LaunchpadPalette.SealerColor;
     public ModdedRoleTeams Team => ModdedRoleTeams.Crewmate;
-    public TORWLFactions Faction => TORWLFactions.Support;
+    public TORWLFactions Faction => TORWLFactions.CrewPower;
     public CustomRoleConfiguration Configuration => new(this)
     {
         Icon = LaunchpadAssets.Sealer,

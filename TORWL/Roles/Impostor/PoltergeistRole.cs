@@ -12,7 +12,7 @@ public class PoltergeistRole(IntPtr ptr) : RoleBehaviour(ptr), IImpostorRole, IA
     public string RoleDescription => "Use your abilities to stop the crew from winning.\nYou are a <b>GHOST ROLE</b>.";
     public string RoleLongDescription => "When you get voted out, you have a chance to become the Poltergeist. Use your abilities to sabotage the crew so they are unable to win.\nThis is a <b>GHOST ROLE</b>";
     public Color RoleColor => LaunchpadPalette.PoltergeistColor;
-    public TORWLFactions Faction => TORWLFactions.Saboteur;
+    public TORWLFactions Faction => TORWLFactions.ImpPower;
 
     public CustomRoleConfiguration Configuration => new(this)
     {

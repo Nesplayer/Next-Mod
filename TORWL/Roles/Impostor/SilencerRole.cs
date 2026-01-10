@@ -16,7 +16,7 @@ namespace TORWL.Roles.Impostor
         public string RoleLongDescription => "Silence players during meetings.\nDisables the ability to send messages in chat.";
         public Color RoleColor => LaunchpadPalette.SilencerColor;
         public ModdedRoleTeams Team => ModdedRoleTeams.Impostor;
-        public TORWLFactions Faction => TORWLFactions.Saboteur;
+        public TORWLFactions Faction => TORWLFactions.ImpPower;
 
         public CustomRoleConfiguration Configuration => new(this)
         {

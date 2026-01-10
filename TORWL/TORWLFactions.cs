@@ -3,12 +3,15 @@
     public enum TORWLFactions
     {
         // Crewmates
-        Protective,
+        CrewProtective,
         CrewKilling,
-        Support,
+        CrewSupport,
+        CrewPower,
         // Impostors
         Saboteur,
         Stealth,
+        ImpPower,
+        ImpSupport,
         // Covens
         Hexcraft,
         Alchemica,
@@ -16,7 +19,6 @@
         // Neutrals
         NeutKilling,
         Benign,
-        Evil,
-        Trickster
+        Evil
     }
 }

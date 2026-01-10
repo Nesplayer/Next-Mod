@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Reactor.Utilities.Extensions;
+using TORWL.Features;
 using TORWL.Roles.Crewmate;
 using TORWL.Roles.Impostor;
 using TORWL.Roles.Neutral;
@@ -18,9 +20,10 @@ namespace TORWL.Utilities
         {
             return role.Faction switch
             {
-                TORWLFactions.Protective => $"<b><color=#4A90E2>Crewmate Protective</color></b>",
-                TORWLFactions.CrewKilling => $"<b><color=#D0021B>Crewmate Killing</color></b>",
-                TORWLFactions.Support => $"<b><color=#7ED321>Crewmate Support</color></b>",
+                TORWLFactions.CrewProtective => $"<b><color=#{LaunchpadPalette.Crewmate.ToHtmlStringRGBA()}>Crewmate Protective</color></b>",
+                TORWLFactions.CrewKilling => $"<b><color=#{LaunchpadPalette.Crewmate.ToHtmlStringRGBA()}>Crewmate Killing</color></b>",
+                TORWLFactions.CrewSupport => $"<b><color=#{LaunchpadPalette.Crewmate.ToHtmlStringRGBA()}>Crewmate Support</color></b>",
+                TORWLFactions.CrewPower => $"<b><color=#{LaunchpadPalette.Crewmate.ToHtmlStringRGBA()}>Crewmate Power</color></b>",
                 _ => $"Unknown"
             };
         }
@@ -29,8 +32,10 @@ namespace TORWL.Utilities
         {
             return role.Faction switch
             {
-                TORWLFactions.Saboteur => $"<b><color=#B00015>Impostor Saboteur</color></b>",
-                TORWLFactions.Stealth => $"<b><color=#8B0000>Impostor Stealth</color></b>",
+                TORWLFactions.Saboteur => $"<b><color=#{LaunchpadPalette.Impostor.ToHtmlStringRGBA()}>Impostor Saboteur</color></b>",
+                TORWLFactions.Stealth => $"<b><color=#{LaunchpadPalette.Impostor.ToHtmlStringRGBA()}>Impostor Stealth</color></b>",
+                TORWLFactions.ImpPower => $"<b><color=#{LaunchpadPalette.Impostor.ToHtmlStringRGBA()}>Impostor Power</color></b>",
+                TORWLFactions.ImpSupport => $"<b><color=#{LaunchpadPalette.Impostor.ToHtmlStringRGBA()}>Impostor Support</color></b>",
                 _ => $"Unknown"
             };
         }
@@ -39,10 +44,9 @@ namespace TORWL.Utilities
         {
             return role.Faction switch
             {
-                TORWLFactions.NeutKilling => $"<b><color=#D0021B>Neutral Killing</color></b>",
-                TORWLFactions.Benign => $"<b><color=#F5A623>Neutral Benign</color></b>",
-                TORWLFactions.Evil => $"<b><color=#D35400>Neutral Evil</color></b>",
-                TORWLFactions.Trickster => $"<b><color=#F8E71C>Neutral Trickster</color></b>",
+                TORWLFactions.NeutKilling => $"<b><color=#{LaunchpadPalette.Neutral.ToHtmlStringRGBA()}>Neutral Killing</color></b>",
+                TORWLFactions.Benign => $"<b><color=#{LaunchpadPalette.Neutral.ToHtmlStringRGBA()}>Neutral Benign</color></b>",
+                TORWLFactions.Evil => $"<b><color=#{LaunchpadPalette.Neutral.ToHtmlStringRGBA()}>Neutral Evil</color></b>",
                 _ => $"Unknown"
             };
         }
@@ -51,9 +55,9 @@ namespace TORWL.Utilities
         {
             return role.Faction switch
             {
-                TORWLFactions.Hexcraft => $"<b><color=#8E44AD>Coven Hexcraft</color></b>",
-                TORWLFactions.Alchemica => $"<b><color=#2ECC71>Coven Alchemica</color></b>",
-                TORWLFactions.Dominion => $"<b><color=#9B59B6>Coven Dominion</color></b>",
+                TORWLFactions.Hexcraft => $"<b><color=#{LaunchpadPalette.Coven.ToHtmlStringRGBA()}>Coven Hexcraft</color></b>",
+                TORWLFactions.Alchemica => $"<b><color=#{LaunchpadPalette.Coven.ToHtmlStringRGBA()}>Coven Alchemica</color></b>",
+                TORWLFactions.Dominion => $"<b><color=#{LaunchpadPalette.Coven.ToHtmlStringRGBA()}>Coven Dominion</color></b>",
                 _ => $"Unknown"
             };
         }

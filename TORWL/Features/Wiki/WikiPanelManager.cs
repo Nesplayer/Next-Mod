@@ -3,7 +3,10 @@ using TMPro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Il2CppInterop.Runtime.Attributes;
+using MiraAPI.GameOptions;
+using MiraAPI.GameOptions.Attributes;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Reactor.Utilities.Attributes;
@@ -15,6 +18,7 @@ using MiraAPI.Roles;
 using MiraAPI.Modifiers.Types;
 using TORWL.Modifiers;
 using MiraAPI.Modifiers;
+using MiraAPI.Utilities;
 using TORWL.Utilities;
 
 namespace TORWL.Features.Wiki

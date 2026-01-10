@@ -13,7 +13,7 @@ public class SheriffRole(IntPtr ptr) : CrewmateRole(ptr), ICrewmateRole
     public string RoleLongDescription => $"You can shoot players,\nif you shoot an {Palette.ImpostorRed.ToTextColor()}Impostor</color> you will kill him\nbut if you shoot a {Palette.CrewmateBlue.ToTextColor()}Crewmate</color>, you will die with him.";
     public Color RoleColor => LaunchpadPalette.SheriffColor;
     public ModdedRoleTeams Team => ModdedRoleTeams.Crewmate;
-    public TORWLFactions Faction => TORWLFactions.Protective;
+    public TORWLFactions Faction => TORWLFactions.CrewPower;
 
     public CustomRoleConfiguration Configuration => new(this)
     {

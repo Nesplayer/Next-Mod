@@ -26,7 +26,7 @@ public class GeneralOptions : AbstractOptionGroup
     [ModdedToggleOption("Ban Cheaters")] public bool BanCheaters { get; set; } = true;
     [ModdedToggleOption("Disable Meeting Teleport")] public bool DisableMeetingTeleport { get; set; } = false;
     [ModdedToggleOption("Auto-Start Lobby")] public bool AutoStart { get; set; } = false;
-    public ModdedNumberOption AutoStartAfter { get; } = new("Auto-Start after", 0f, 5f, 1f, 1f, MiraNumberSuffixes.Seconds)
+    public ModdedNumberOption AutoStartAfter { get; } = new("Auto-Start after", 100f, 10f, 400, 10f, MiraNumberSuffixes.Seconds)
     {
         Visible = () => OptionGroupSingleton<GeneralOptions>.Instance.AutoStart,
     };

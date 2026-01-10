@@ -12,7 +12,7 @@ public class CoronerRole(IntPtr ptr) : CrewmateRole(ptr), ICrewmateRole
     public string RoleLongDescription => RoleDescription;
     public Color RoleColor => LaunchpadPalette.CoronerColor;
     public ModdedRoleTeams Team => ModdedRoleTeams.Crewmate;
-    public TORWLFactions Faction => TORWLFactions.Support;
+    public TORWLFactions Faction => TORWLFactions.CrewSupport;
     public CustomRoleConfiguration Configuration => new(this)
     {
         Icon = LaunchpadAssets.Coroner,
