@@ -25,9 +25,9 @@ Here are a couple of them:
 
 ## 📥 Installation
 
-- 🚀 Download the latest version using the Launcher app (available on our [GitHub](), soon!).
+- 🚀 Download the latest version using the Launcher app (available on our [GitHub](https://github.com/TownofReworked), soon!).
 - 🛠️ For manual installation, you must also download:
   
-  - Unity.Il2Cpp win-x86 BepInEx build
-  - Reactor
-  - Mira API
+  - [Unity.Il2Cpp win-x86 BepInEx build](https://builds.bepinex.dev/projects/bepinex_be/752/BepInEx-Unity.IL2CPP-win-x86-6.0.0-be.752+dd0655f.zip)
+  - [Reactor](https://github.com/NuclearPowered/Reactor/releases/download/2.5.0/Reactor.dll)
+  - [Mira API](https://github.com/All-Of-Us-Mods/MiraAPI/releases/download/0.3.6/MiraAPI.dll)
